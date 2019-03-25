@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.aiyang.stickydecoration.R;
@@ -19,6 +20,14 @@ import java.util.List;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    // 加载状态（默认为加载完成）
+    private int loadState = 2;
+    // 正在加载
+    public final int LOADING = 1;
+    // 加载完成
+    public final int LOADING_COMPLETE = 2;
+    // 加载到底
+    public final int LOADING_END = 3;
     /**
      * context
      */
@@ -47,16 +56,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    static class ViewHolderFoot extends RecyclerView.ViewHolder {
+        TextView textfoot;
+        public ViewHolderFoot(View itemView) {
+            super(itemView);
+            textfoot = (TextView) itemView.findViewById(R.id.list_item_foot);
+        }
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(mContext).inflate(R.layout.item_layout , parent ,false);
-//        Log.d("aaa","onCreateViewHolder————"+viewType);
+
         if (viewType == 1){//标题
+            View item = LayoutInflater.from(mContext).inflate(R.layout.item_layout , parent ,false);
             item.setTag(true);
-        }else{
+            return new ViewHolde(item);
+        }else if (viewType ==0){
+            View item = LayoutInflater.from(mContext).inflate(R.layout.foot_layout , parent ,false);
             item.setTag(false);
+            return new ViewHolderFoot(item);
+        }else{
+            View item = LayoutInflater.from(mContext).inflate(R.layout.item_layout , parent ,false);
+            item.setTag(false);
+            return new ViewHolde(item);
         }
-        return new ViewHolde(item);
+
     }
 
     @Override
@@ -64,24 +87,50 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof  ViewHolde){
             mData =mDatas.get(position);
            ((ViewHolde) holder).txt. setText(mData.getName());
-//            Log.d("aaa","onBindViewHolder————"+mData.getName());
            if (mData.getType() == 1){
-               ((ViewHolde) holder).txt .setTextColor(mContext.getColor(R.color.colorAccent));
-               ((ViewHolde) holder).txt .setBackgroundColor(mContext.getColor(R.color.backcolor));
+               ((ViewHolde) holder).txt .setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+               ((ViewHolde) holder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.backcolor));
                ((ViewHolde) holder).txt .setTextSize(20);
            }
+        }else{
+            switch (loadState) {
+                case LOADING:
+                    ((ViewHolderFoot) holder).textfoot.setText("正在加载。。");
+                    ((ViewHolderFoot) holder).textfoot.setVisibility(View.VISIBLE);
+                    break;
+                case LOADING_COMPLETE:
+                    ((ViewHolderFoot) holder).textfoot.setVisibility(View.GONE);
+                    break;
+                case LOADING_END:
+                    ((ViewHolderFoot) holder).textfoot.setText("没有更多数据");
+                    ((ViewHolderFoot) holder).textfoot.setVisibility(View.VISIBLE);
+                    break;
+            }
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-//        Log.d("aaa","getItemViewType————"+ mDatas.get(position).getType());
-        return mDatas.get(position).getType();
+        if (position == getItemCount() - 1){
+            return 0;
+        }else{
+            return mDatas.get(position).getType();
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+        return mDatas.size()+1;
+    }
+
+    public void setLoadState(int loadState) {
+        this.loadState = loadState;
+        notifyDataSetChanged();
+    }
+
+    public boolean isLoadState() {
+        return this.loadState == LOADING_COMPLETE;
     }
 
 }
