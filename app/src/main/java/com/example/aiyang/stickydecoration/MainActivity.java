@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.aiyang.stickydecoration.adapter.RecyclerAdapter;
 import com.example.aiyang.stickydecoration.bean.data;
 import com.example.aiyang.stickydecoration.view.StickyItemDecoration;
+import com.example.aiyang.stickydecoration.view.UpPullOnScrollListener;
 import com.example.aiyang.stickydecoration.view.UpPullRecyclerViewOnScrollListener;
 
 public class MainActivity extends AppCompatActivity{
@@ -28,21 +29,7 @@ public class MainActivity extends AppCompatActivity{
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new StickyItemDecoration());
         mRecyclerView.setAdapter(mAdapter =new RecyclerAdapter(this, data.getDataList()));
-        mRecyclerView.addOnScrollListener(new UpPullRecyclerViewOnScrollListener() {
-            @Override
-            public void onLoadMoreData() {
-
-                if (isHasMore) {
-                    if (mAdapter.isLoadState()) {
-                        mAdapter.setLoadState(mAdapter.LOADING);//显示加载
-                    }
-                } else {
-                    mAdapter.setLoadState(mAdapter.LOADING_END);//没有更多
-                }
-                Toast.makeText(MainActivity.this, "上拉更新了 ", Toast.LENGTH_SHORT).show();
-                getMoreData();
-            }
-        });
+        mRecyclerView.addOnScrollListener(new UpPullRecyclerViewOnScrollListener(onScrollListener));
 
         mSwipe = (SwipeRefreshLayout)findViewById(R.id.swiperefresh);
         mSwipe.setColorSchemeColors(Color.RED,Color.BLUE,Color.GREEN);
@@ -54,13 +41,32 @@ public class MainActivity extends AppCompatActivity{
                     public void run() {
 
                         mSwipe.setRefreshing(false);
-                        Toast.makeText(MainActivity.this, "下拉更新了 ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "下拉更新了 ", Toast.LENGTH_SHORT).show();
                     }
                 },3000);
             }
         });
     }
+    UpPullOnScrollListener onScrollListener =  new UpPullOnScrollListener() {
+        @Override
+        public void onLoadMoreData() {
 
+            if (isHasMore) {
+                if (mAdapter.isLoadState()) {
+                    mAdapter.setLoadState(mAdapter.LOADING);//显示加载
+                }
+            } else {
+                mAdapter.setLoadState(mAdapter.LOADING_END);//没有更多
+            }
+            Toast.makeText(MainActivity.this, "上拉更新了 ", Toast.LENGTH_SHORT).show();
+            getMoreData();
+        }
+
+        @Override
+        public void onRefreshData() {
+            Toast.makeText(MainActivity.this, "下拉刷新了 ", Toast.LENGTH_SHORT).show();
+        }
+    };
     /**
      * 网络请求数据
      */
