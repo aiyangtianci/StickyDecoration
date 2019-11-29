@@ -62,10 +62,11 @@ public class ListContainer extends LinearLayout {
                 //获取名称
                 String typeName = view.getTag().toString();
                 //联动右侧
-                for (int ii = 0; ii < mFoodBeanData.size(); ii++) {
-                    GoodsBean titleGood = mFoodBeanData.get(ii);
+                for (int position = 0; position < mFoodBeanData.size(); position++) {
+                    GoodsBean titleGood = mFoodBeanData.get(position);
                     if (titleGood.getItemViewType() == 1 && titleGood.getCategoryName().equals(typeName)) {
-                        dishMoveToPosition(ii);
+                        LinearLayoutManager ll = (LinearLayoutManager) recyclerView2.getLayoutManager();
+                        ll.scrollToPositionWithOffset(position,0);
                         break;
                     }
                 }
@@ -73,27 +74,6 @@ public class ListContainer extends LinearLayout {
         });
     }
 
-    /**
-     * 右侧商品列表移动到指定位置
-     * @param postion
-     */
-    private void dishMoveToPosition(int postion) {
-        LinearLayoutManager ll = (LinearLayoutManager) recyclerView2.getLayoutManager();
-        int firstItem = ll.findFirstVisibleItemPosition();
-        int lastItem = ll.findLastVisibleItemPosition();
-        if (postion <= firstItem) {//当要置顶到屏幕顶部
-            recyclerView2.smoothScrollToPosition(postion);
-        } else if (postion <= lastItem) {
-            //当要置顶的项已经在屏幕上显示时
-            int top = recyclerView2.getChildAt(postion - firstItem).getTop();
-            recyclerView2.scrollBy(0, top);
-        } else {
-            //当要置顶的项在当前显示的最后一项的后面时
-            ll.scrollToPositionWithOffset(postion,0);
-            //这里这个变量是用在RecyclerView滚动监听里面的
-//            move = true;
-        }
-    }
 
     /**
      * 商品列表（右侧）
