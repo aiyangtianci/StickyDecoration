@@ -36,8 +36,12 @@ public class GoodsShelfActivity extends AppCompatActivity {
         List<GoodCategoryBean> data = new ArrayList<>();
         for (int i =0 ;i < 10; i++){
             GoodCategoryBean foodCategory  =new GoodCategoryBean();
-            foodCategory.setName("商品种类");
+            foodCategory.setName("商品种类"+i);
             List<GoodsBean> goodsList = new ArrayList<>();
+            GoodsBean title =new GoodsBean();
+            title.setCategoryName("商品类名");
+            title.setItemViewType(1);
+            goodsList.add(title);
             for (int j = 0 ; j <8 ;j ++){
                 GoodsBean food =new GoodsBean();
                 food.setName("普通商品");
@@ -45,7 +49,7 @@ public class GoodsShelfActivity extends AppCompatActivity {
                 food.setSubFood(2);
                 food.setUnit("份");
                 food.setPrice(39);
-                food.setCategoryName("商品类名");
+                food.setItemViewType(2);
                 goodsList.add(food);
             }
             foodCategory.setGoods(goodsList);

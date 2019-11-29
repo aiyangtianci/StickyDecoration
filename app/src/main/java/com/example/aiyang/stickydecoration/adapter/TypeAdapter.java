@@ -168,7 +168,6 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         int firstItem = linlm.findFirstVisibleItemPosition();
         int lastItem = linlm.findLastVisibleItemPosition();
 
-        //提前把9滑出来
         if (getItemCount() > 5) {
             lastItem -= 3;//  =  last - 3
         }

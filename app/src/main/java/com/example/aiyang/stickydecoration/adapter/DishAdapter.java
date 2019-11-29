@@ -60,11 +60,38 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    static class ViewTitle extends RecyclerView.ViewHolder {
+
+        TextView txt;
+        public ViewTitle(View itemView) {
+            super(itemView);
+            txt = itemView.findViewById(R.id.txt);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == getItemCount() - 1){
+            return 0;
+        }else{
+            return flist.get(position).getItemViewType();
+        }
+    }
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_dish,viewGroup,false);
-        return new ViewHolde(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+
+        if (viewType == 1){//标题
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_layout , viewGroup ,false);
+            view.setTag(true);
+            return new ViewTitle(view);
+
+        }else{//普通
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_dish,viewGroup,false);
+            return new ViewHolde(view);
+        }
+
     }
 
     @Override
@@ -78,6 +105,11 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     load(item.getPicture())
                     .centerCrop()
                     .into(((ViewHolde) viewHolder).imageView);
+        }else if (viewHolder instanceof ViewTitle){
+            ((ViewTitle) viewHolder).txt.setTextColor(mContext.getResources().getColor(R.color.txtcolor));
+            ((ViewTitle) viewHolder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.backcolor));
+            ((ViewTitle) viewHolder).txt .setTextSize(18);
+            ((ViewTitle) viewHolder).txt.setText(item.getCategoryName());
         }
     }
 

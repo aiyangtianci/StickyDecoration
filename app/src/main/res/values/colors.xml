@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="backcolor">#ad3f41b5</color>
-
+    <color name="backcolor">#B6B4B4</color>
+    <color name="txtcolor">#000000</color>
     <color name="red">#e72a18</color>
 
 </resources>

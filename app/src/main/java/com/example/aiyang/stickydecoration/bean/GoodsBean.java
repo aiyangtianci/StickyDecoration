@@ -48,7 +48,21 @@ public class GoodsBean {
     private String CategoryName;
 
 
-    //增加难度
+    /**
+     * 子项类型
+     * 1: 标题
+     * 2：普通
+     */
+    private int ItemViewType ;
+
+    public int getItemViewType() {
+        return ItemViewType;
+    }
+
+    public void setItemViewType(int itemViewType) {
+        ItemViewType = itemViewType;
+    }
+
     private int SubFood;//1是套餐，2是普通
 
     public int getSubFood() {

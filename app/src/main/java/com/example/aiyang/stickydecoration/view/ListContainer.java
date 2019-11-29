@@ -61,6 +61,16 @@ public class ListContainer extends LinearLayout {
                 //获取名称
                 String typeName = view.getTag().toString();
                 //联动右侧
+                for (int ii = 0; ii < mFoodBeanData.size(); ii++) {
+                    GoodsBean typeBean = mFoodBeanData.get(ii);
+                    // 寻找第一个 type 的 position
+//                    if (typeBean.getCategoryName().equals(typeName)) {
+//                        index = ii;
+//                        moveToPosition(index);
+//                        break;
+//                    }
+//                    }
+                }
             }
         });
     }
