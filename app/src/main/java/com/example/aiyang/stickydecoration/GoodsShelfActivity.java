@@ -39,7 +39,7 @@ public class GoodsShelfActivity extends AppCompatActivity {
             foodCategory.setName("商品种类"+i);
             List<GoodsBean> goodsList = new ArrayList<>();
             GoodsBean title =new GoodsBean();
-            title.setCategoryName("商品类名");
+            title.setCategoryName(foodCategory.getName());
             title.setItemViewType(1);
             goodsList.add(title);
             for (int j = 0 ; j <8 ;j ++){
