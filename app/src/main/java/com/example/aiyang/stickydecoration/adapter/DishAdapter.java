@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.aiyang.stickydecoration.R;
 import com.example.aiyang.stickydecoration.bean.GoodsBean;
 
 import java.util.List;
+import java.util.Locale;
 
 public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -67,7 +69,16 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+        GoodsBean item = flist.get(i);
+        if (viewHolder instanceof ViewHolde){
+            ((ViewHolde) viewHolder).tv_name.setText(item.getName());
+            ((ViewHolde) viewHolder).tv_price.setText(String.format(Locale.CHINA, "￥%s", item.getPrice()));
+            ((ViewHolde) viewHolder).tv_unit.setText("/" + item.getUnit());
+            Glide.with(mContext).
+                    load(item.getPicture())
+                    .centerCrop()
+                    .into(((ViewHolde) viewHolder).imageView);
+        }
     }
 
     @Override
