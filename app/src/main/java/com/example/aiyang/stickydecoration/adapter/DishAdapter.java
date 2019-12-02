@@ -89,6 +89,7 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }else{//普通
             View view = LayoutInflater.from(mContext).inflate(R.layout.item_dish,viewGroup,false);
+            view.setTag(false);
             return new ViewHolde(view);
         }
 

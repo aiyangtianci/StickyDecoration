@@ -69,7 +69,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration{
                 getStickyViewHolder(parent);//得到标题的 viewHolder
                 cacheStickyViewPosition(i); //收集标题的 position
 
-                if (item.getTop() <= 0) {//标题和父布局的距离。（一般初始化时候先进入）
+                if (item.getTop() <= 0) {//标题和父布局的距离
                     bindDataForStickyView(mLayoutManager.findFirstVisibleItemPosition(), parent.getMeasuredWidth());//将第一个可见子项位置 和 父布局宽 传入
                 } else {
                     if (mStickyPositionList.size() > 0) {
@@ -99,7 +99,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration{
             }
         }
 
-        if (!mCurrentUIFindStickView) {//取反判断（因为它默认值是false）表示：若存在小标题则进入
+        if (!mCurrentUIFindStickView) {
             mStickyItemViewMarginTop = 0;
             //判断子元素等于item总数并且缓存数大于0
             if (mLayoutManager.findFirstVisibleItemPosition() + parent.getChildCount() == parent.getAdapter().getItemCount() && mStickyPositionList.size() > 0) {
@@ -159,7 +159,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration{
         mBindDataPosition = position;
         mAdapter.onBindViewHolder(mViewHolder, mBindDataPosition);//改变标题的展示效果，该方法在Adapter中
         measureLayoutStickyItemView(width);//设置布局位置及大小
-        mItemViewHeight = mViewHolder.itemView.getBottom() - mViewHolder.itemView.getTop();//计算标题布局高度
+        mItemViewHeight = mViewHolder.itemView.getBottom() - mViewHolder.itemView.getTop();//计算标题布局高度,用于和下一个标题做重叠
     }
     /**
      * 设置布局位置及大小

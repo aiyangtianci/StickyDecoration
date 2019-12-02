@@ -67,6 +67,7 @@ public class ListContainer extends LinearLayout {
                     if (titleGood.getItemViewType() == 1 && titleGood.getCategoryName().equals(typeName)) {
                         LinearLayoutManager ll = (LinearLayoutManager) recyclerView2.getLayoutManager();
                         ll.scrollToPositionWithOffset(position,0);
+//                        moveToPosition(position);
                         break;
                     }
                 }
@@ -74,6 +75,26 @@ public class ListContainer extends LinearLayout {
         });
     }
 
+//    private void moveToPosition(int n) {
+//        //先从RecyclerView的LayoutManager中获取第一项和最后一项的Position
+//        LinearLayoutManager ll = (LinearLayoutManager) recyclerView2.getLayoutManager();
+//        int firstItem = ll.findFirstVisibleItemPosition();
+//        int lastItem = ll.findLastVisibleItemPosition();
+//        //然后区分情况
+//        if (n <= firstItem) {
+//            //当要置顶的项在当前显示的第一个项的前面时
+//            recyclerView2.scrollToPosition(n);
+//        } else if (n <= lastItem) {
+//            //当要置顶的项已经在屏幕上显示时
+//            int top = recyclerView2.getChildAt(n - firstItem).getTop();
+//            recyclerView2.scrollBy(0, top);
+//        } else {
+//            //当要置顶的项在当前显示的最后一项的后面时
+//            recyclerView2.smoothScrollToPosition(n);
+//            //这里这个变量是用在RecyclerView滚动监听里面的
+////            move = true;
+//        }
+//    }
 
     /**
      * 商品列表（右侧）
@@ -99,14 +120,16 @@ public class ListContainer extends LinearLayout {
     /**
      * 设置右侧数据
      */
-    public void setDishAdapterData(List<GoodsBean> foods){
+    public void setDishAdapterData(List<GoodsBean> foods) {
         mFoodBeanData.clear();
         mFoodBeanData.addAll(foods);
         dishAdapter.notifyDataSetChanged();
+        recyclerView2.addItemDecoration(new ItemDecoration(foods));
     }
 
     /**
      * 设置右侧种类名称
+     *
      * @param headerViewText
      */
     public void setFirstStickyHeaderViewText(String headerViewText) {
