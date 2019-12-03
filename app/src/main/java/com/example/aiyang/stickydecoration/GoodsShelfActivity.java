@@ -37,21 +37,26 @@ public class GoodsShelfActivity extends AppCompatActivity {
         for (int i =0 ;i < 10; i++){
             GoodCategoryBean foodCategory  =new GoodCategoryBean();
             foodCategory.setName("商品种类"+i);
+            //为每个子类前，创建一个标题
             List<GoodsBean> goodsList = new ArrayList<>();
             GoodsBean title =new GoodsBean();
             title.setCategoryName(foodCategory.getName());
             title.setItemViewType(1);
             goodsList.add(title);
-            for (int j = 0 ; j <8 ;j ++){
-                GoodsBean food =new GoodsBean();
-                food.setName("普通商品");
-                food.setPicture("http://img2.daojia.com.cn/images/littlesheep/food/1e40d55db86158a8f30241e4fa44ed0c.jpg");
-                food.setSubFood(2);
-                food.setUnit("份");
-                food.setPrice(39);
-                food.setItemViewType(2);
-                goodsList.add(food);
+            //子类
+            if (i>1){
+                for (int j = 0 ; j <8 ;j ++){
+                    GoodsBean food =new GoodsBean();
+                    food.setName("普通商品");
+                    food.setPicture("http://img2.daojia.com.cn/images/littlesheep/food/1e40d55db86158a8f30241e4fa44ed0c.jpg");
+                    food.setSubFood(2);
+                    food.setUnit("份");
+                    food.setPrice(39);
+                    food.setItemViewType(2);
+                    goodsList.add(food);
+                }
             }
+
             foodCategory.setGoods(goodsList);
             data.add(foodCategory);
         }

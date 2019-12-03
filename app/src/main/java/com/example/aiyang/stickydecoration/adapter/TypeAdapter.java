@@ -116,7 +116,7 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((ViewHolde) viewHolder).tv_name.setTypeface(Typeface.DEFAULT_BOLD);
         }else{
             ((ViewHolde) viewHolder).item_main.setBackgroundColor(0xf8f8f8);
-            ((ViewHolde) viewHolder).tv_name.setTextColor(Color.parseColor("#6b6b6b"));
+            ((ViewHolde) viewHolder).tv_name.setTextColor(Color.parseColor("#7A7A7A"));
             ((ViewHolde) viewHolder).tv_name.setTypeface(Typeface.DEFAULT);
         }
     }
@@ -127,9 +127,9 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     /**
-     * 关联右侧菜品，滑动切换菜品种类（
+     * 关联右侧菜品，滑动切换菜品种类
      */
-    public void setTypeCheck(String typeName) {
+    public void setTypeCheckFromScroll(String typeName) {
         //如果当前item没被选中
         if (!typeName.equals(typeStr)) {
             for (int i = 0; i < data.size(); i++) {
@@ -152,7 +152,7 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             data.get(checked_item).setChecked(false);
             notifyItemChanged(checked_item);
 
-            //记录新选中
+            //记录新选中设为true
             this.checked_item = checked;
             data.get(checked_item).setChecked(true);
             typeStr = data.get(checked).getName();

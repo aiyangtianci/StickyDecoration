@@ -1,6 +1,7 @@
 package com.example.aiyang.stickydecoration.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -108,9 +109,10 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .into(((ViewHolde) viewHolder).imageView);
         }else if (viewHolder instanceof ViewTitle){
             ((ViewTitle) viewHolder).txt.setTextColor(mContext.getResources().getColor(R.color.txtcolor));
-            ((ViewTitle) viewHolder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.backcolor));
-            ((ViewTitle) viewHolder).txt .setTextSize(18);
+            ((ViewTitle) viewHolder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.whait));
+            ((ViewTitle) viewHolder).txt .setTextSize(14);
             ((ViewTitle) viewHolder).txt.setText(item.getCategoryName());
+            ((ViewTitle) viewHolder).txt.setTypeface(Typeface.DEFAULT_BOLD);
         }
     }
 

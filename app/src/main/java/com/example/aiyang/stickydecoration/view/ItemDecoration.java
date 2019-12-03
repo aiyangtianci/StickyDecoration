@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,9 +19,9 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
 
     public ItemDecoration(List<GoodsBean> goods) {
         this.goods = goods;
-        for (int i =0; i< goods.size();i++){
+        for (int i = 0; i < goods.size(); i++) {
             GoodsBean bean = goods.get(i);
-            if (bean.getItemViewType() ==1){
+            if (bean.getItemViewType() == 1) {
                 cacheStickyViewPosition(i); //收集标题的在Adapter中的实际position
             }
         }
@@ -57,10 +58,10 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
     private View mStickyItemView;
 
     /**
-     * 标记屏幕可见是否有标题（默认是没有）
+     * 标记屏幕可见标题（默认是没有）
      * 讲解：当屏幕上没有标题时，吸附标题也会消失
      */
-    private boolean mCurrentUIFindStickView;
+    private int mCurrentUIFindStickView;
 
     /**
      * 标题距离顶部距离
@@ -81,53 +82,57 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
          * RecyclerView和LayoutManager的getChildCount()方法返回可见的item数量,同样的getChildAt(int index)获取的也是可见的第index个位置的item。
          * RecyclerView.getAdapter().getItemCount()，这个返回的就是实际的item数量
          */
-       if (mAdapter.getItemCount() <= 0) return;
+        if (mAdapter.getItemCount() <= 0) return;
 
 
         mLayoutManager = (LinearLayoutManager) parent.getLayoutManager();
 
-        mCurrentUIFindStickView = false;
+        mCurrentUIFindStickView = 0;
 
-        for (int i = 0, size = mLayoutManager.getChildCount(); i < size; i++) {
+
+        View tagItem = null;
+        int index = 0, size = mLayoutManager.getChildCount();
+
+        for (int i = 0; i < size; i++) {
 
             View item = mLayoutManager.getChildAt(i);
+
             if ((boolean) item.getTag() == true) {
-
-                mCurrentUIFindStickView = true;
-
-                if (item.getTop() <= 0) {//主流程：（1）标题移动到在屏幕第一行时
-
-                    bindDataForStickyView(mLayoutManager.findFirstVisibleItemPosition(), parent.getMeasuredWidth());//主流程：（2）将其设置成吸附标题
-
-                    mStickyItemViewMarginTop = 0;
-
-                } else if (item.getTop() > 0 && item.getTop() <= mItemViewHeight) {//处理两个标题叠在一起的绘制效果
-
-                    mStickyItemViewMarginTop = item.getTop() - mItemViewHeight;
-
-                } else {
-                    int currentPosition = mLayoutManager.findFirstVisibleItemPosition() + i;//被下滑的标题，在Adapter中的索引
-                    int indexOfCurrentPosition = mStickyPositionList.lastIndexOf(currentPosition);//根据标题的position获得所在缓存列表中的索引
-                    bindDataForStickyView(mStickyPositionList.get(indexOfCurrentPosition - 1), parent.getMeasuredWidth());
+                mCurrentUIFindStickView++;
+                tagItem = item;
+                index = i;
+                if (mCurrentUIFindStickView >= 2) {//处理多个标题相邻时
+                    break;
                 }
-
-                drawStickyItemView(c);// 主流程：（3)画出吸附的标题
-
-                break;  //结束循环
             }
         }
 
-        /**
-         * 主流程：（4）当屏幕可见列表没有标题项，吸附标题依然显示
-         */
-        if (mCurrentUIFindStickView == false) {
+        if (mCurrentUIFindStickView > 0) {
+
+            if (tagItem.getTop() <= 0) {//标题移动到在屏幕第一行时
+
+                bindDataForStickyView(mLayoutManager.findFirstVisibleItemPosition(), parent.getMeasuredWidth());//将其设置成吸附标题
+
+                mStickyItemViewMarginTop = 0;
+
+            } else {
+                int currentPosition = mLayoutManager.findFirstVisibleItemPosition() + index;//被下滑的标题，在Adapter中的索引
+                int indexOfCurrentPosition = mStickyPositionList.lastIndexOf(currentPosition);//根据标题的position获得所在缓存列表中的索引
+                bindDataForStickyView(mStickyPositionList.get(indexOfCurrentPosition - 1), parent.getMeasuredWidth());
+
+                if (tagItem.getTop() <= mItemViewHeight) {//重叠
+                    mStickyItemViewMarginTop = tagItem.getTop() - mItemViewHeight;
+                }
+            }
+            drawStickyItemView(c);//画出吸附的标题
+        } else {
             mStickyItemViewMarginTop = 0;
             drawStickyItemView(c);
         }
     }
 
     /**
-     *  收集标题的 position
+     * 收集标题的 position
      */
     private void cacheStickyViewPosition(int position) {
         if (!mStickyPositionList.contains(position)) {//防止重复

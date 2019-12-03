@@ -6,8 +6,8 @@
 
     <FrameLayout
         android:id="@+id/fl_dish"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
        android:layout_margin="10dp"
         android:background="@drawable/bg_round">
 
