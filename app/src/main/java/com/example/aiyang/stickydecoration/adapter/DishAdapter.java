@@ -28,15 +28,6 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     RecyclerView layout;
     /**
-     * 被选中的item
-     */
-    private int checked_item;
-    /**
-     * item名称
-     */
-    private String typeStr;
-
-    /**
      * 数据
      */
     private List<GoodsBean> flist;

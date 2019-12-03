@@ -26,7 +26,18 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
             }
         }
     }
+    /**
+     * title名称
+     */
+    private String typeStr;
+    /**
+     * title改变事件
+     */
+    private onItemDecorationChange listener;
 
+    public void onItemDecorationChangeListener (onItemDecorationChange listener){
+        this.listener =listener;
+    }
     /**
      * 子项布局管理
      */
@@ -156,6 +167,7 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
     private void bindDataForStickyView(int position, int width) {
         if (mBindDataPosition == position || mViewHolder == null) return;//已经是吸附位置了 或 视图不存在
         mBindDataPosition = position;//屏幕可见第一个item在列表中的实际索引位置
+        listener.onTitleChange(goods.get(mBindDataPosition).getCategoryName());//设置监听
         mAdapter.onBindViewHolder(mViewHolder, mBindDataPosition);//吸附标题设置显示数据
         measureLayoutStickyItemView(width);//设置布局位置
         mItemViewHeight = mStickyItemView.getBottom() - mStickyItemView.getTop();

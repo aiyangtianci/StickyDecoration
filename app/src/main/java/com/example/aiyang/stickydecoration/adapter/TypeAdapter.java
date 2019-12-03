@@ -127,24 +127,7 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     /**
-     * 关联右侧菜品，滑动切换菜品种类
-     */
-    public void setTypeCheckFromScroll(String typeName) {
-        //如果当前item没被选中
-        if (!typeName.equals(typeStr)) {
-            for (int i = 0; i < data.size(); i++) {
-                //查找需要选中的item
-                if (data.get(i).getName().equals(typeName) && i != checked_item) {
-                    setChecked(i);
-                    moveToPosition(i);
-                    break;
-                }
-            }
-        }
-    }
-
-    /**
-     * 设置当前被选中的 item
+     * 自身点击：设置被选中的 item
      */
     public void setChecked(int checked) {
         if (this.checked_item != checked){
@@ -160,6 +143,23 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+
+    /**
+     * 右侧滑动：设置被选中的 item
+     */
+    public void setTypeCheckFromScroll(String typeName) {
+        //如果当前item没被选中
+        if (!typeName.equals(typeStr)) {
+            for (int i = 0; i < data.size(); i++) {
+                //查找需要选中的item
+                if (data.get(i).getName().equals(typeName) && i != checked_item) {
+                    setChecked(i);
+                    moveToPosition(i);
+                    break;
+                }
+            }
+        }
+    }
     /**
      * 移动view到指定屏幕位置
      */

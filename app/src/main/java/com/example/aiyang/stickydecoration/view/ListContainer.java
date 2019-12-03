@@ -83,13 +83,7 @@ public class ListContainer extends LinearLayout {
         recyclerView2.setLayoutManager(new LinearLayoutManager(mContext));
         dishAdapter = new DishAdapter(mContext, recyclerView2, mFoodBeanData);
         recyclerView2.setAdapter(dishAdapter);
-        recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-//                typeAdapter.setTypeCheckFromScroll(String.valueOf(stickyInfoView.getContentDescription()));
-            }
-        });
+
     }
 
     /**
@@ -110,15 +104,14 @@ public class ListContainer extends LinearLayout {
         mFoodBeanData.addAll(foods);
         dishAdapter.notifyDataSetChanged();
         //吸附标题
-        recyclerView2.addItemDecoration(new ItemDecoration(foods));
-    }
-
-    /**
-     * 设置右侧种类名称
-     *
-     * @param headerViewText
-     */
-    public void setFirstStickyHeaderViewText(String headerViewText) {
+        ItemDecoration itemDecoration =new ItemDecoration(foods);
+        recyclerView2.addItemDecoration(itemDecoration);
+        itemDecoration.onItemDecorationChangeListener(new onItemDecorationChange() {
+            @Override
+            public void onTitleChange(String title) {
+                typeAdapter.setTypeCheckFromScroll(title);
+            }
+        });
     }
 
 }

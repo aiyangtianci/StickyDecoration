@@ -45,7 +45,6 @@ public class GoodsBean {
     private String picture;
     private String unit;
     private double price;
-    private String CategoryName;
 
 
     /**
@@ -53,7 +52,8 @@ public class GoodsBean {
      * 1: 标题
      * 2：普通
      */
-    private int ItemViewType ;
+    private int ItemViewType;
+    private String CategoryName;
 
     public int getItemViewType() {
         return ItemViewType;
