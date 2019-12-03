@@ -45,10 +45,35 @@ public class GoodsShelfActivity extends AppCompatActivity {
             goodsList.add(title);
             //子类
             if (i>1){
-                for (int j = 0 ; j <8 ;j ++){
+                for (int j = 0 ; j <7 ;j ++){
                     GoodsBean food =new GoodsBean();
                     food.setName("普通商品");
+                    //网络图片
                     food.setPicture("http://img2.daojia.com.cn/images/littlesheep/food/1e40d55db86158a8f30241e4fa44ed0c.jpg");
+                    //本地图片
+                    switch (j){
+                        case 0:
+                            food.setPicture_local(R.mipmap.food_icon1);
+                            break;
+                        case 1:
+                            food.setPicture_local(R.mipmap.food_icon2);
+                            break;
+                        case 2:
+                            food.setPicture_local(R.mipmap.food_icon3);
+                            break;
+                        case 3:
+                            food.setPicture_local(R.mipmap.food_icon4);
+                            break;
+                        case 4:
+                            food.setPicture_local(R.mipmap.food_icon5);
+                            break;
+                        case 5:
+                            food.setPicture_local(R.mipmap.food_icon6);
+                            break;
+                        case 6:
+                            food.setPicture_local(R.mipmap.food_icon7);
+                            break;
+                    }
                     food.setSubFood(2);
                     food.setUnit("份");
                     food.setPrice(39);

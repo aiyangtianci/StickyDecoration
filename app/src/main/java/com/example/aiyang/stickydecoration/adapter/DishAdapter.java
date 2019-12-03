@@ -95,7 +95,7 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((ViewHolde) viewHolder).tv_price.setText(String.format(Locale.CHINA, "￥%s", item.getPrice()));
             ((ViewHolde) viewHolder).tv_unit.setText("/" + item.getUnit());
             Glide.with(mContext).
-                    load(item.getPicture())
+                    load(item.getPicture_local())
                     .centerCrop()
                     .into(((ViewHolde) viewHolder).imageView);
         }else if (viewHolder instanceof ViewTitle){

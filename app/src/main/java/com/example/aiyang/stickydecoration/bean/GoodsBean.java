@@ -43,6 +43,16 @@ public class GoodsBean {
 
     private String name;
     private String picture;
+
+    public int getPicture_local() {
+        return picture_local;
+    }
+
+    public void setPicture_local(int picture_local) {
+        this.picture_local = picture_local;
+    }
+
+    private int  picture_local;
     private String unit;
     private double price;
 

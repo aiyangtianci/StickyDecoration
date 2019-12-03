@@ -4,18 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.aiyang.stickydecoration.MainActivity">
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/swiperefresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclelist"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    <Button
+        android:id="@+id/golistpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="列表上下拉加载和分页加载"/>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+    <Button
+        android:id="@+id/goshelfpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商品展示双列表关联"/>
 </LinearLayout>
