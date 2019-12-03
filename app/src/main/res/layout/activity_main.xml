@@ -15,11 +15,15 @@
         android:text="列表上下拉加载和分页加载"/>
 
 
-
+    <Button
+        android:id="@+id/coordinatorpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="页面联动"/>
 
     <Button
         android:id="@+id/goshelfpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="商品展示双列表关联"/>
+        android:text="最终合成的仿美团点餐页面"/>
 </LinearLayout>

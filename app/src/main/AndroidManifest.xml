@@ -25,7 +25,8 @@
 
         <activity android:name=".GoodsShelfActivity">
         </activity>
-        <activity android:name=".ListScrollListenerActivity" />
+        <activity android:name=".demo.ListScrollListenerActivity" />
+        <activity android:name=".demo.CoordinatorActivity"/>
     </application>
 
 </manifest>

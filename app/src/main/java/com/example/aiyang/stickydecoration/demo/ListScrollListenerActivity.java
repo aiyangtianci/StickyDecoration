@@ -1,4 +1,4 @@
-package com.example.aiyang.stickydecoration;
+package com.example.aiyang.stickydecoration.demo;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.aiyang.stickydecoration.R;
 import com.example.aiyang.stickydecoration.adapter.RecyclerAdapter;
 import com.example.aiyang.stickydecoration.bean.data;
 import com.example.aiyang.stickydecoration.view.StickyItemDecoration;
