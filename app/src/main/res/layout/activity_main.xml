@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context="com.example.aiyang.stickydecoration.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/mainColor"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorAccent"
+            android:textSize="18sp"
+            android:text="Material design" />
+
+        <View
+            android:id="@+id/menu_pop"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp" />
+    </android.support.v7.widget.Toolbar>
 
 
     <Button
         android:id="@+id/golistpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="列表上下拉加载和分页加载"/>
+        android:layout_marginTop="50dp"
+        android:background="?attr/mainBgColor"
+        android:text="列表上下拉加载和分页加载"
+        android:textColor="?attr/colorAccent" />
 
 
     <Button
         android:id="@+id/coordinatorpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="页面联动"/>
+        android:layout_marginTop="50dp"
+        android:background="?attr/mainBgColor"
+        android:text="页面联动Coordinator"
+
+        android:textColor="?attr/colorAccent" />
 
     <Button
         android:id="@+id/goshelfpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="最终合成的仿美团点餐页面"/>
+        android:layout_marginTop="50dp"
+        android:background="?attr/mainBgColor"
+        android:text="最终合成的仿美团点餐页面"
+        android:textColor="?attr/colorAccent" />
 </LinearLayout>
