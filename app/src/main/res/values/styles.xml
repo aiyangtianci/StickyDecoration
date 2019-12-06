@@ -42,7 +42,7 @@
     <style name="AppThemeNoAction.Blue">
         <item name="colorPrimary">#2196F3</item>
         <item name="colorPrimaryDark">#1976D2</item>
-        <item name="colorAccent">#607D8B</item>
+        <item name="colorAccent">#FAFAFA</item>
         <item name="mainBgColor">#BBDEFB</item>
         <item name="mainColor">#2196F3</item>
     </style>
@@ -58,7 +58,7 @@
     <style name="AppThemeNoAction.Grey">
         <item name="colorPrimary">#607D8B</item>
         <item name="colorPrimaryDark">#455A64</item>
-        <item name="colorAccent">#58575A</item>
+        <item name="colorAccent">#F7F7F8</item>
         <item name="mainBgColor">#CFD8DC</item>
         <item name="mainColor">#607D8B</item>
     </style>
