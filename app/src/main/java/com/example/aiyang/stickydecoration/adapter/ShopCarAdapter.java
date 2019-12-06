@@ -1,7 +1,6 @@
 package com.example.aiyang.stickydecoration.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import com.example.aiyang.stickydecoration.bean.ShopBean;
 import java.util.List;
 import java.util.Locale;
 
-public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ShopCarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * context
@@ -27,41 +26,44 @@ public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     /**
      * 数据
      */
-    private List<ShopBean> flist;
+    private List<GoodsBean> flist;
 
-    public SimpleAdapter(Context mContext, List<ShopBean> flist) {
+    public ShopCarAdapter(Context mContext, List<GoodsBean> flist) {
         this.mContext = mContext;
         this.flist = flist;
     }
 
     class ViewHolde extends RecyclerView.ViewHolder {
-        TextView shop_name;
-        TextView tv_unit;
+        TextView car_name;
+        TextView car_specification;
         ImageView imageView ;
+        TextView car_price;
         public ViewHolde(View itemView) {
             super(itemView);
-            shop_name =itemView.findViewById(R.id.shop_name);
-            tv_unit = itemView.findViewById(R.id.shop_description);
-            imageView = itemView.findViewById(R.id.shop_img);
+            car_name =itemView.findViewById(R.id.car_name);
+            car_specification = itemView.findViewById(R.id.car_specification);
+            car_price = itemView.findViewById(R.id.car_price);
+            imageView = itemView.findViewById(R.id.car_img);
         }
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_img,viewGroup,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_car,viewGroup,false);
         return new ViewHolde(view);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ShopBean item = flist.get(i);
+        GoodsBean item = flist.get(i);
         if (viewHolder instanceof ViewHolde){
-            ((ViewHolde) viewHolder).shop_name.setText(item.getShopName());
-            ((ViewHolde) viewHolder).tv_unit.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getShopDescrition()));
+            ((ViewHolde) viewHolder).car_name.setText(item.getName());
+//            ((ViewHolde) viewHolder).car_specification.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getSubFood()));
+            ((ViewHolde) viewHolder).car_price.setText(String.format(Locale.CHINA,"¥ %s",item.getPrice()));
             Glide.with(mContext).
-                    load(item.getPicture_loacal())
+                    load(item.getPicture_local())
                     .centerCrop()
                     .into(((ViewHolde) viewHolder).imageView);
         }

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.aiyang.stickydecoration.view.ShopCarView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/car_mainfl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:behavior_peekHeight="0dp">
+
+    <View
+        android:id="@+id/blackview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:background="#60000000"
+        android:elevation="4dp"
+        android:visibility="gone" />
+
+   <android.support.design.widget.CoordinatorLayout
+       android:layout_width="match_parent"
+       android:layout_height="500dp"
+       android:elevation="4dp"
+       android:background="@color/transparency"
+       android:layout_gravity="bottom">
+
+       <LinearLayout
+           android:id="@+id/car_container"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/white"
+           android:orientation="vertical"
+           android:layout_gravity="bottom"
+           app:layout_behavior="@string/bottom_sheet_behavior">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="32dp"
+               android:background="#eeeeee"
+               android:clickable="true"
+               android:gravity="center_vertical"
+               android:orientation="horizontal"
+               android:paddingLeft="16dp"
+               android:paddingRight="16dp">
+
+               <View
+                   android:layout_width="4dp"
+                   android:layout_height="15dp"
+                   android:background="@color/colorPrimary" />
+
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="5dp"
+                   android:layout_weight="1"
+                   android:text="已选商品"
+                   android:textColor="@color/txtcolor2"
+                   android:textSize="11sp" />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:drawableLeft="@mipmap/icon_delete_shopcar"
+                   android:drawablePadding="2dp"
+                   android:gravity="center"
+                   android:text="清空购物车"
+                   android:textColor="@color/txtcolor2"
+                   android:textSize="11sp" />
+           </LinearLayout>
+
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/car_recyclerview"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="10dp"
+               android:layout_marginEnd="10dp"
+               android:layout_marginBottom="56dp"
+               android:background="@color/white"
+               android:overScrollMode="never"/>
+
+       </LinearLayout>
+
+       <RelativeLayout
+           android:id="@+id/car_rl"
+           android:layout_width="match_parent"
+           android:layout_height="55dp"
+           android:layout_gravity="bottom"
+           android:background="#454545">
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:gravity="center_vertical"
+               android:paddingLeft="30dp">
+
+               <ImageView
+                   android:id="@+id/iv_shop_car"
+                   android:layout_width="35dp"
+                   android:layout_height="35dp"
+                   android:src="@mipmap/icon_shopcart" />
+
+               <TextView
+                   android:id="@+id/car_badge"
+                   style="@style/badge_style"
+                   android:layout_marginLeft="-15dp"
+                   android:layout_marginTop="-15dp"
+                   android:layout_marginRight="10dp"
+                   android:text="0"/>
+
+               <TextView
+                   android:id="@+id/tv_amount"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="10dp"
+                   android:text="¥ 0.0"
+                   android:textColor="@color/white"
+                   android:textSize="18sp" />
+           </LinearLayout>
+
+           <TextView
+               android:id="@+id/car_limit"
+               android:layout_width="130dp"
+               android:layout_height="match_parent"
+               android:layout_alignParentRight="true"
+               android:background="@drawable/selector_dish_next"
+               android:gravity="center"
+               android:text="选好了"
+               android:textColor="@color/white"
+               android:textSize="16sp" />
+
+       </RelativeLayout>
+   </android.support.design.widget.CoordinatorLayout>
+
+</com.example.aiyang.stickydecoration.view.ShopCarView>

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GoodsShelfActivity">
+        <activity android:name=".demo.GoodsShelfActivity">
         </activity>
         <activity android:name=".demo.ListScrollListenerActivity" />
         <activity android:name=".demo.CoordinatorActivity"/>

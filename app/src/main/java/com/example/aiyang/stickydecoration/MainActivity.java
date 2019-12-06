@@ -14,6 +14,7 @@ import android.widget.PopupWindow;
 
 import com.example.aiyang.stickydecoration.commen.ThemeUtil;
 import com.example.aiyang.stickydecoration.demo.CoordinatorActivity;
+import com.example.aiyang.stickydecoration.demo.GoodsShelfActivity;
 import com.example.aiyang.stickydecoration.demo.ListScrollListenerActivity;
 
 public class MainActivity extends AppCompatActivity {

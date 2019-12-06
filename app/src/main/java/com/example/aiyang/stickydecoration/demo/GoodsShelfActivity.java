@@ -1,12 +1,14 @@
-package com.example.aiyang.stickydecoration;
+package com.example.aiyang.stickydecoration.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.aiyang.stickydecoration.R;
 import com.example.aiyang.stickydecoration.bean.GoodCategoryBean;
 import com.example.aiyang.stickydecoration.bean.GoodsBean;
 import com.example.aiyang.stickydecoration.bean.TypeBean;
 import com.example.aiyang.stickydecoration.view.ListContainer;
+import com.example.aiyang.stickydecoration.view.ShopCarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +17,26 @@ public class GoodsShelfActivity extends AppCompatActivity {
 
     //自定义点餐列表
     private ListContainer listcontainer;
+    private ShopCarView car_mainfl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.goods_layout);
 
         initView();
-        getHTTPJsonData();
+
     }
 
     private void initView() {
 
         listcontainer = findViewById(R.id.listcontainer);
+        car_mainfl =findViewById(R.id.car_mainfl);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getHTTPJsonData();
     }
 
     /**
@@ -110,6 +120,8 @@ public class GoodsShelfActivity extends AppCompatActivity {
             listcontainer.setTypeAdapterData(typeList);
             //设置右适配器
             listcontainer.setDishAdapterData(foodList);
+
+            car_mainfl.setCarAdapterData(foodList);
         }
     }
 }

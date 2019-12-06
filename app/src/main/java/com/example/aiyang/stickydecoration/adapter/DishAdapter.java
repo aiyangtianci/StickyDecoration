@@ -100,7 +100,7 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .into(((ViewHolde) viewHolder).imageView);
         }else if (viewHolder instanceof ViewTitle){
             ((ViewTitle) viewHolder).txt.setTextColor(mContext.getResources().getColor(R.color.txtcolor));
-            ((ViewTitle) viewHolder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.whait));
+            ((ViewTitle) viewHolder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.white));
             ((ViewTitle) viewHolder).txt .setTextSize(14);
             ((ViewTitle) viewHolder).txt.setText(item.getCategoryName());
             ((ViewTitle) viewHolder).txt.setTypeface(Typeface.DEFAULT_BOLD);
