@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.aiyang.stickydecoration.view.ShopCarView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/car_mainfl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:behavior_peekHeight="0dp">
+    android:orientation="vertical">
 
     <View
         android:id="@+id/blackview"
@@ -18,19 +16,20 @@
 
    <android.support.design.widget.CoordinatorLayout
        android:layout_width="match_parent"
-       android:layout_height="500dp"
+       android:layout_height="450dp"
        android:elevation="4dp"
        android:background="@color/transparency"
-       android:layout_gravity="bottom">
+       android:layout_gravity="bottom"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
        <LinearLayout
            android:id="@+id/car_container"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:background="@color/white"
            android:orientation="vertical"
-           android:layout_gravity="bottom"
-           app:layout_behavior="@string/bottom_sheet_behavior">
+           android:background="@color/white"
+           app:layout_behavior="@string/bottom_sheet_behavior"
+           app:behavior_peekHeight="55dp">
 
            <LinearLayout
                android:layout_width="match_parent"
@@ -70,11 +69,10 @@
            <android.support.v7.widget.RecyclerView
                android:id="@+id/car_recyclerview"
                android:layout_width="match_parent"
-               android:layout_height="wrap_content"
+               android:layout_height="match_parent"
                android:layout_marginStart="10dp"
                android:layout_marginEnd="10dp"
                android:layout_marginBottom="56dp"
-               android:background="@color/white"
                android:overScrollMode="never"/>
 
        </LinearLayout>
@@ -123,10 +121,11 @@
                android:background="@drawable/selector_dish_next"
                android:gravity="center"
                android:text="选好了"
+               android:clickable="false"
                android:textColor="@color/white"
                android:textSize="16sp" />
 
        </RelativeLayout>
    </android.support.design.widget.CoordinatorLayout>
 
-</com.example.aiyang.stickydecoration.view.ShopCarView>
+</FrameLayout>

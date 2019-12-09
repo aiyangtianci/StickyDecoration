@@ -25,19 +25,15 @@ public class GoodsShelfActivity extends AppCompatActivity {
 
         initView();
 
+        getHTTPJsonData();
     }
 
     private void initView() {
 
         listcontainer = findViewById(R.id.listcontainer);
-        car_mainfl =findViewById(R.id.car_mainfl);
+        car_mainfl = findViewById(R.id.car_mainfl);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getHTTPJsonData();
-    }
 
     /**
      * 请求的数据(假数据)
@@ -122,6 +118,7 @@ public class GoodsShelfActivity extends AppCompatActivity {
             listcontainer.setDishAdapterData(foodList);
 
             car_mainfl.setCarAdapterData(foodList);
+            car_mainfl.updateAmount(180,3);
         }
     }
 }

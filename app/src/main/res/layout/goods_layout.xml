@@ -10,9 +10,12 @@
     <com.example.aiyang.stickydecoration.view.ListContainer
         android:id="@+id/listcontainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"/>
 
 
-    <include
-        layout="@layout/activity_car"/>
+    <com.example.aiyang.stickydecoration.view.ShopCarView
+        android:id="@+id/car_mainfl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>
