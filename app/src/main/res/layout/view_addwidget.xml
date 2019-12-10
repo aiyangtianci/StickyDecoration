@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/tv_price"
+    android:layout_alignParentRight="true"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/iv_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/subbutton_bg"
+        android:text="➖"
+        android:textSize="9sp"
+        android:textColor="@color/grey" />
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/addbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/addbutton_bg"
+        android:text="➕"
+        android:textSize="9sp"
+        android:textColor="@color/white" />
+
+</LinearLayout>

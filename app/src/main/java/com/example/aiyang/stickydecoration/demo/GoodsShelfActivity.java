@@ -2,18 +2,20 @@ package com.example.aiyang.stickydecoration.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.aiyang.stickydecoration.R;
 import com.example.aiyang.stickydecoration.bean.GoodCategoryBean;
 import com.example.aiyang.stickydecoration.bean.GoodsBean;
 import com.example.aiyang.stickydecoration.bean.TypeBean;
+import com.example.aiyang.stickydecoration.view.AddWidget;
 import com.example.aiyang.stickydecoration.view.ListContainer;
 import com.example.aiyang.stickydecoration.view.ShopCarView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodsShelfActivity extends AppCompatActivity {
+public class GoodsShelfActivity extends AppCompatActivity implements AddWidget.OnAddClick {
 
     //自定义点餐列表
     private ListContainer listcontainer;
@@ -50,7 +52,7 @@ public class GoodsShelfActivity extends AppCompatActivity {
             title.setItemViewType(1);
             goodsList.add(title);
             //子类
-            if (i>1){
+            if (i>0){
                 for (int j = 0 ; j <7 ;j ++){
                     GoodsBean food =new GoodsBean();
                     food.setName("普通商品");
@@ -60,24 +62,31 @@ public class GoodsShelfActivity extends AppCompatActivity {
                     switch (j){
                         case 0:
                             food.setPicture_local(R.mipmap.food_icon1);
+                            food.setDescription("新品推荐，夏季佳品！");
                             break;
                         case 1:
                             food.setPicture_local(R.mipmap.food_icon2);
+                            food.setDescription("🔥火热，赶紧来一份！");
                             break;
                         case 2:
                             food.setPicture_local(R.mipmap.food_icon3);
+                            food.setDescription("换季佳品，优惠半价！");
                             break;
                         case 3:
                             food.setPicture_local(R.mipmap.food_icon4);
+                            food.setDescription("门店招牌");
                             break;
                         case 4:
                             food.setPicture_local(R.mipmap.food_icon5);
+                            food.setDescription("美味不可挡");
                             break;
                         case 5:
                             food.setPicture_local(R.mipmap.food_icon6);
+                            food.setDescription("来一份尝尝");
                             break;
                         case 6:
                             food.setPicture_local(R.mipmap.food_icon7);
+                            food.setDescription("打折促销活动，优惠中");
                             break;
                     }
                     food.setSubFood(2);
@@ -85,6 +94,11 @@ public class GoodsShelfActivity extends AppCompatActivity {
                     food.setPrice(39);
                     food.setItemViewType(2);
                     goodsList.add(food);
+                    if (j%2 == 1){
+                        food.setFoodTag(1);
+                    }else{
+                        food.setFoodTag(2);
+                    }
                 }
             }
 
@@ -115,10 +129,13 @@ public class GoodsShelfActivity extends AppCompatActivity {
             //设置左适配器
             listcontainer.setTypeAdapterData(typeList);
             //设置右适配器
-            listcontainer.setDishAdapterData(foodList);
+            listcontainer.setDishAdapterData(foodList,this);
 
-            car_mainfl.setCarAdapterData(foodList);
-            car_mainfl.updateAmount(180,3);
         }
+    }
+
+    @Override
+    public void onAddClick(GoodsBean fb) {
+        car_mainfl.setCarAdapterAddData(fb);
     }
 }

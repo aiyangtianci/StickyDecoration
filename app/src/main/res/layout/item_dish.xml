@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/food_main"
     android:layout_width="match_parent"
+    android:background="?android:selectableItemBackground"
+    android:layout_gravity="center_vertical"
     android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/fl_dish"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-       android:layout_margin="10dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+       android:layout_margin="15dp"
         android:background="@drawable/bg_round">
 
         <ImageView
@@ -20,39 +22,84 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:layout_marginLeft="-15dp">
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:textColor="@color/txtcolor2"
             android:text="菜名" />
 
-        <LinearLayout
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_description"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:text="商品描述：" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
                 android:text="price" />
 
             <TextView
                 android:id="@+id/tv_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_price"
                 android:text="单位" />
-        </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:id="@+id/car_mutify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="多规格"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/badge_bg"/>
+
+
+                <com.example.aiyang.stickydecoration.view.AddWidget
+                    android:id="@+id/car_addwidget"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
 
     </LinearLayout>
+
+
 
 
 </LinearLayout>

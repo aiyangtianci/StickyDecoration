@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -25,16 +26,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class ShopCarView extends FrameLayout {
-    private BottomSheetBehavior behavior;
     private Context mContext;
-    private List<GoodsBean> mFoodBeanData = new ArrayList<>();
-    public boolean sheetScrolling;
-    private ShopCarAdapter CarAdapter;
-    public int[] carLocation;
-    private View blackview;
-    private RelativeLayout shoprl;
+    private BottomSheetBehavior behavior;//购物车列表布局
+    private List<GoodsBean> mFoodBeanData = new ArrayList<>();//购物车数据
+    public boolean sheetScrolling;//滑动中
+    private ShopCarAdapter CarAdapter;//适配器
     private RecyclerView car_recyclerview;
-    private int ShopCarNum =0;
+    public int[] carLocation;
 
     public ShopCarView(@NonNull Context context) {
         super(context);
@@ -45,7 +43,7 @@ public class ShopCarView extends FrameLayout {
     public ShopCarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        inflate(mContext,R.layout.activity_car,this);
+        inflate(mContext, R.layout.activity_car, this);
 
         initShopCarList();
 
@@ -58,6 +56,7 @@ public class ShopCarView extends FrameLayout {
     private void initShopCarList() {
         car_recyclerview = findViewById(R.id.car_recyclerview);
         car_recyclerview.setLayoutManager(new LinearLayoutManager(mContext));
+        car_recyclerview.setItemAnimator(new DefaultItemAnimator());//设置Item增加、移除动画
         CarAdapter = new ShopCarAdapter(mContext, mFoodBeanData);
         car_recyclerview.setAdapter(CarAdapter);
     }
@@ -65,18 +64,20 @@ public class ShopCarView extends FrameLayout {
     /**
      * 设置购物车数据
      */
-    public void setCarAdapterData(List<GoodsBean> foods) {
-        mFoodBeanData.clear();
-        mFoodBeanData.addAll(foods);
-        CarAdapter.notifyDataSetChanged();
+    public void setCarAdapterAddData(GoodsBean food) {
+        mFoodBeanData.add(food);
+        CarAdapter.notifyItemInserted(mFoodBeanData.indexOf(food));//插入一个并刷新，正常
+
+        updateAmount();//刷新底部购物车展示信息
     }
 
+
     /**
-     * 设置滑动
+     * 行为处理
      */
     public void setBehavior() {
         behavior = BottomSheetBehavior.from(findViewById(R.id.car_container));
-        blackview = findViewById(R.id.blackview);
+        final View blackview = findViewById(R.id.blackview);
 
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -103,12 +104,11 @@ public class ShopCarView extends FrameLayout {
             }
         });
 
-        shoprl = findViewById(R.id.car_rl);
-        shoprl.setOnClickListener(new OnClickListener() {
+        findViewById(R.id.car_rl).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (sheetScrolling) return;//防止滑动中多次点击
-                if (ShopCarNum <= 0) return;//购物车为空
+                if (mFoodBeanData.size() == 0) return;//购物车为空
                 if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                     behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 } else {
@@ -121,27 +121,29 @@ public class ShopCarView extends FrameLayout {
     /**
      * 设置购物车数量和价格
      */
-    public void updateAmount(float amount, int total) {
-        ShopCarNum = total;
+    public void updateAmount() {
+        TextView carBadge = findViewById(R.id.car_badge); //数量
+        TextView selected = findViewById(R.id.car_limit);//选好了按钮
 
-        TextView  selected = findViewById(R.id.car_limit);//选好了
-        if (total <= 0 || amount < 0) {
+        int ShopCarNum = mFoodBeanData.size();
+        double PriceMount  = 0;
+        for (int i=0 ; i<ShopCarNum;i++){
+            GoodsBean bean = mFoodBeanData.get(i);
+            PriceMount +=bean.getPrice();
+        }
+        if (ShopCarNum <= 0 || PriceMount < 0) {
             selected.setClickable(false);
+            carBadge.setVisibility(View.INVISIBLE);
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         } else {
             selected.setClickable(true);
-        }
-
-        TextView  priceAmount = findViewById(R.id.tv_amount);//价格
-        priceAmount.setText("￥ " + String.format(Locale.CHINA, "%.2f", amount));
-
-        TextView carBadge = findViewById(R.id.car_badge); //数量
-        if (total > 0) {
             carBadge.setVisibility(View.VISIBLE);
-            carBadge.setText(String.valueOf(total));
-        } else {
-            carBadge.setVisibility(View.INVISIBLE);
+            carBadge.setText(String.valueOf(ShopCarNum));
         }
+
+        TextView priceAmount = findViewById(R.id.tv_amount);//价格
+        priceAmount.setText("￥ " + String.format(Locale.CHINA, "%.2f", PriceMount));
+
     }
 
 }

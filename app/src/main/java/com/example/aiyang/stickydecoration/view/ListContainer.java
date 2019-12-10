@@ -99,10 +99,11 @@ public class ListContainer extends LinearLayout {
     /**
      * 设置右侧数据
      */
-    public void setDishAdapterData(List<GoodsBean> foods) {
+    public void setDishAdapterData(List<GoodsBean> foods,AddWidget.OnAddClick onClick) {
         mFoodBeanData.clear();
         mFoodBeanData.addAll(foods);
         dishAdapter.notifyDataSetChanged();
+        dishAdapter.setOnAddClick(onClick);
         //吸附标题
         ItemDecoration itemDecoration =new ItemDecoration(foods);
         recyclerView2.addItemDecoration(itemDecoration);

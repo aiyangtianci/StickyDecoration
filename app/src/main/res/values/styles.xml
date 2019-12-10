@@ -18,7 +18,19 @@
     </style>
 
 
+    <style name="ProcessDialog" parent="AppThemeNoAction">
+        <item name="android:windowBackground">@color/transparency</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 
+    <style name="loadingdialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!-- Dialog的边框，@null标识无 -->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/translucent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+    </style>
     <!-- Base application theme. -->
 
     <style name="AppThemeNoAction" parent="Theme.AppCompat.Light.NoActionBar">

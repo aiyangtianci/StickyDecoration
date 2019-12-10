@@ -60,7 +60,7 @@ public class ShopCarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         GoodsBean item = flist.get(i);
         if (viewHolder instanceof ViewHolde){
             ((ViewHolde) viewHolder).car_name.setText(item.getName());
-            ((ViewHolde) viewHolder).car_specification.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getCategoryName()));
+            ((ViewHolde) viewHolder).car_specification.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getDescription()));
             ((ViewHolde) viewHolder).car_price.setText(String.format(Locale.CHINA,"¥ %s",item.getPrice()));
             Glide.with(mContext).
                     load(item.getPicture_local())

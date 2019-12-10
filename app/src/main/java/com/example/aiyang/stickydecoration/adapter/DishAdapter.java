@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.aiyang.stickydecoration.R;
 import com.example.aiyang.stickydecoration.bean.GoodsBean;
+import com.example.aiyang.stickydecoration.commen.DialogUtil;
+import com.example.aiyang.stickydecoration.view.AddWidget;
 
 import java.util.List;
 import java.util.Locale;
@@ -32,6 +34,15 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     private List<GoodsBean> flist;
 
+    /**
+     * 多规格接口
+     */
+    private AddWidget.OnAddClick onAddClick;
+
+    public void setOnAddClick(AddWidget.OnAddClick onAddClick){
+        this.onAddClick =onAddClick;
+    }
+
     public DishAdapter(Context mContext, RecyclerView layout, List<GoodsBean> flist) {
         this.mContext = mContext;
         this.layout = layout;
@@ -43,12 +54,20 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView tv_price;
         TextView tv_unit;
         ImageView imageView ;
+
+        TextView car_mutify;
+        TextView tv_description;
+        AddWidget car_addwidget;
         public ViewHolde(View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_price =itemView.findViewById(R.id.tv_price);
             tv_unit = itemView.findViewById(R.id.tv_unit);
             imageView = itemView.findViewById(R.id.iv_food);
+
+            tv_description = itemView.findViewById(R.id.tv_description);
+            car_mutify = itemView.findViewById(R.id.car_mutify);
+            car_addwidget = itemView.findViewById(R.id.car_addwidget);
         }
     }
 
@@ -88,7 +107,7 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         GoodsBean item = flist.get(i);
         if (viewHolder instanceof ViewHolde){
             ((ViewHolde) viewHolder).tv_name.setText(item.getName());
@@ -98,7 +117,32 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     load(item.getPicture_local())
                     .centerCrop()
                     .into(((ViewHolde) viewHolder).imageView);
-        }else if (viewHolder instanceof ViewTitle){
+
+            ((ViewHolde) viewHolder).tv_description.setText("商品介绍："+item.getDescription());
+            if (item.getFoodTag() == 1){
+                ((ViewHolde) viewHolder).car_mutify.setVisibility(View.VISIBLE);
+                ((ViewHolde) viewHolder).car_addwidget.setVisibility(View.GONE);
+                ((ViewHolde) viewHolder).car_mutify.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        DialogUtil.showMultiTagOfDish(mContext, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                onAddClick.onAddClick(flist.get(i));
+                            }
+                        });
+
+                    }
+                });
+            }else{
+                ((ViewHolde) viewHolder).car_mutify.setVisibility(View.GONE);
+                ((ViewHolde) viewHolder).car_addwidget.setVisibility(View.VISIBLE);
+                ((ViewHolde) viewHolder).car_addwidget.setGoodData(item,onAddClick);
+            }
+
+
+        }else if (viewHolder instanceof ViewTitle){//标题
             ((ViewTitle) viewHolder).txt.setTextColor(mContext.getResources().getColor(R.color.txtcolor));
             ((ViewTitle) viewHolder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.white));
             ((ViewTitle) viewHolder).txt .setTextSize(14);
@@ -111,4 +155,6 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return flist.size();
     }
+
+
 }
