@@ -18,11 +18,6 @@ import com.example.aiyang.stickydecoration.R;
  */
 
 public class DialogUtil {
-    private static String selectPos;
-    private static final String YES  = "yes";
-    private static final String NO  = "no";
-
-
     /**
      * 拨打电话
      *
@@ -30,7 +25,7 @@ public class DialogUtil {
      * @param phone
      */
     public static void makeCall(Context context, String phone) {
-        final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.ProcessDialog)
+        final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.dialog)
                 .setCancelable(false).create();
         if (((Activity) context).isFinishing()) {
             return;
@@ -38,7 +33,7 @@ public class DialogUtil {
         if (!TextUtils.isEmpty(phone)) {
             alertDialog.show();
         } else {
-            showSimpleDialog(context,"提示","电话号码为空，不可拨打电话!",null);
+            showSimpleDialog(context, "提示", "电话号码为空，不可拨打电话!", null);
             return;
         }
         alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -47,20 +42,23 @@ public class DialogUtil {
 
     /**
      * 单品多规格
+     *
      * @param context
      */
-    public static void showMultiTagOfDish(Context context, View.OnClickListener listener) {
-        final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.ProcessDialog).setCancelable(false).create();
-        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        alertDialog.setContentView(R.layout.select_multi_tag_dish);
-        alertDialog.findViewById(R.id.addtocar).setOnClickListener(listener);
-        alertDialog.findViewById(R.id.iv_sub).setOnClickListener(new View.OnClickListener() {
+    public static Dialog showMultiTagOfDish(Context context, View.OnClickListener listener) {
+        final Dialog dialog = new Dialog(context, R.style.dialog);
+        dialog.setContentView(R.layout.select_multi_tag_dish);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.findViewById(R.id.addtocar).setOnClickListener(listener);
+        dialog.findViewById(R.id.iv_sub).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
+                dialog.dismiss();
             }
         });
-        alertDialog.show();
+        dialog.show();
+        return dialog;
     }
 
 

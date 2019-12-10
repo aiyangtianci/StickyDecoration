@@ -1,5 +1,6 @@
 package com.example.aiyang.stickydecoration.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -105,7 +106,7 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
     }
-
+    Dialog dialog;
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         GoodsBean item = flist.get(i);
@@ -125,11 +126,11 @@ public class DishAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ((ViewHolde) viewHolder).car_mutify.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        DialogUtil.showMultiTagOfDish(mContext, new View.OnClickListener() {
+                        dialog = DialogUtil.showMultiTagOfDish(mContext, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 onAddClick.onAddClick(flist.get(i));
+                                dialog.cancel();
                             }
                         });
 

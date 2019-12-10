@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:background="@color/transparency"
     android:orientation="vertical">
 
@@ -20,11 +19,11 @@
 
             <TextView
                 android:id="@+id/tv_food_tag_title"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="15dp"
                 android:textStyle="bold"
-                tools:text="@string/app_name" />
+                android:text="菜品名"/>
 
 
             <TextView
