@@ -14,11 +14,15 @@ import com.bumptech.glide.Glide;
 import com.example.aiyang.stickydecoration.R;
 import com.example.aiyang.stickydecoration.bean.GoodsBean;
 import com.example.aiyang.stickydecoration.bean.ShopBean;
+import com.example.aiyang.stickydecoration.view.BaseAdapter;
 
 import java.util.List;
 import java.util.Locale;
 
-public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+/**
+ * 餐厅适配器
+ */
+public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder> {
 
     /**
      * context
@@ -30,8 +34,9 @@ public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<ShopBean> flist;
 
     public SimpleAdapter(Context mContext, List<ShopBean> flist) {
-        this.mContext = mContext;
-        this.flist = flist;
+        super(mContext, flist);
+        this.mContext =mContext;
+        this.flist =flist;
     }
 
     class ViewHolde extends RecyclerView.ViewHolder {
@@ -46,24 +51,30 @@ public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_img,viewGroup,false);
+    protected RecyclerView.ViewHolder createViewHolder(int viewType, ViewGroup parent) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_img,parent,false);
+        System.out.println("createViewHolder---");
         return new ViewHolde(view);
-
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ShopBean item = flist.get(i);
+    protected void setOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        ShopBean item = flist.get(position);
+        System.out.println("setOnBindViewHolder---");
         if (viewHolder instanceof ViewHolde){
             ((ViewHolde) viewHolder).shop_name.setText(item.getShopName());
             ((ViewHolde) viewHolder).tv_unit.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getShopDescrition()));
-            Glide.with(mContext).
-                    load(item.getPicture_loacal())
-                    .centerCrop()
-                    .into(((ViewHolde) viewHolder).imageView);
+
+            if(scroll){//滚动不加载图片
+                ((ViewHolde) viewHolder).imageView.setImageResource(R.mipmap.ic_launcher);
+            }else {//加载图片
+                Glide.with(mContext).
+                        load(item.getPicture_loacal())
+                        .centerCrop()
+                        .into(((ViewHolde) viewHolder).imageView);
+            }
+
         }
     }
 

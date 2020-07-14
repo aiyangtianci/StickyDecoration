@@ -41,21 +41,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.coordinatorpage).setOnClickListener(new View.OnClickListener() {
+                                                                  @Override
+                                                                  public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CoordinatorActivity.class));
+                                                                  }
+        });
+
         findViewById(R.id.goshelfpage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, GoodsShelfActivity.class));
             }
         });
-
-        findViewById(R.id.coordinatorpage).setOnClickListener(new View.OnClickListener() {
-                                                                  @Override
-                                                                  public void onClick(View view) {
-                                                                      startActivity(new Intent(MainActivity.this, CoordinatorActivity.class
-                                                                      ));
-                                                                  }
-                                                              }
-        );
     }
 
     @Override

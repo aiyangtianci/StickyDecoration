@@ -1,6 +1,7 @@
 package com.example.aiyang.stickydecoration.adapter;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,7 +90,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
            ((ViewHolde) holder).txt. setText(mData.getName());
            if (mData.getType() == 1){
                ((ViewHolde) holder).txt .setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-               ((ViewHolde) holder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.backcolor));
+               ((ViewHolde) holder).txt .setBackgroundColor(mContext.getResources().getColor(R.color.blue));
                ((ViewHolde) holder).txt .setTextSize(20);
            }
         }else{

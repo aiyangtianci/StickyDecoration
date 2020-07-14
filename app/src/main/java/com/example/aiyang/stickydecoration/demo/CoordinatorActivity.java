@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -19,10 +22,15 @@ import com.example.aiyang.stickydecoration.adapter.SimpleAdapter;
 import com.example.aiyang.stickydecoration.bean.ShopBean;
 import com.example.aiyang.stickydecoration.commen.CommonUtil;
 import com.example.aiyang.stickydecoration.view.AppBarStateChangeListener;
+import com.example.aiyang.stickydecoration.view.AutoLoadScrollListener;
+import com.example.aiyang.stickydecoration.view.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 餐厅toolbar联动
+ */
 public class CoordinatorActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -33,6 +41,9 @@ public class CoordinatorActivity extends AppCompatActivity {
     private LinearLayout ll_search;
     private float LL_SEARCH_MAX_WIDTH, LL_SEARCH_MIN_WIDTH;
     private ViewGroup.MarginLayoutParams searchLayoutParams;
+    //创建GestureDetector实例
+    private GestureDetector detector;
+    private SimpleAdapter simpleAdapter;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +52,12 @@ public class CoordinatorActivity extends AppCompatActivity {
         ll_search = findViewById(R.id.ll_search);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         initData();
         recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new SimpleAdapter(this, sLists));
+        recyclerView.setAdapter(simpleAdapter = new SimpleAdapter(this, sLists));
+        recyclerView.addOnScrollListener(new AutoLoadScrollListener());
         appbarlayout = findViewById(R.id.appbarlayout);
         //联动
         appbarlayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
@@ -71,20 +82,41 @@ public class CoordinatorActivity extends AppCompatActivity {
                 }
             }
         });
-
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                detector.onTouchEvent(motionEvent);
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    Log.d("aaa", "抬起---");
+//                    simpleAdapter.setScrolling(false);
+                }
+                return false;
+            }
+        });
         //搜索框
-
         LL_SEARCH_MAX_WIDTH = CommonUtil.getScreenWidth(this) - CommonUtil.dp2px(this, 170f);//布局默认展开时的宽度
         LL_SEARCH_MIN_WIDTH = CommonUtil.dp2px(this, 10f);//布局关闭时的宽度
         searchLayoutParams = (ViewGroup.MarginLayoutParams) ll_search.getLayoutParams();
 
+        detector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+
+                if (Math.abs(v1) > 4000) {
+                    simpleAdapter.setScrolling(true);
+                    Log.d("aaa", "快速滑动中---" + Math.abs(v1));
+                }
+                return false;
+            }
+        });
     }
 
     private void initData() {
         ShopBean shop;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 26; i++) {
             shop = new ShopBean();
-            switch (i) {
+            int index = i % 6;
+            switch (index) {
                 case 0:
                     shop.setPicture_loacal(R.mipmap.shop1);
                     break;

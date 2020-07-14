@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="com.example.aiyang.stickydecoration.MainActivity">
 
     <android.support.v7.widget.Toolbar
@@ -33,30 +34,37 @@
 
     <Button
         android:id="@+id/golistpage"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="?attr/mainBgColor"
-        android:text="列表上下拉加载和分页加载"
+        android:text="列表上拉加载下拉刷新"
         android:textColor="?attr/colorAccent" />
 
 
     <Button
         android:id="@+id/coordinatorpage"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="?attr/mainBgColor"
         android:text="页面联动Coordinator"
-
         android:textColor="?attr/colorAccent" />
 
     <Button
         android:id="@+id/goshelfpage"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="?attr/mainBgColor"
-        android:text="最终合成的仿美团点餐页面"
+        android:text="仿美团点餐页面"
         android:textColor="?attr/colorAccent" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:text="author：aiyang"/>
 </LinearLayout>
