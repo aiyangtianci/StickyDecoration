@@ -64,6 +64,15 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
     protected void setOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         ShopBean item = flist.get(position);
         if (viewHolder instanceof ViewHolde){
+            final int index = position;
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onClick(index);
+                    }
+                }
+            });
             if (position == 0){
                 ((ViewHolde) viewHolder).description_ll.setVisibility(View.GONE);
             }else{
@@ -88,4 +97,17 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
     public int getItemCount() {
         return flist.size();
     }
+
+    //定义接口
+    public interface OnItemClickListener {
+        void onClick(int position);
+    }
+
+    private OnItemClickListener listener;
+
+    // 写一个公共的方法
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 }

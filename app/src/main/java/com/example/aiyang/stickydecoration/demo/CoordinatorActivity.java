@@ -1,5 +1,6 @@
 package com.example.aiyang.stickydecoration.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -98,6 +99,12 @@ public class CoordinatorActivity extends AppCompatActivity {
         recyclerView.setAdapter(simpleAdapter = new SimpleAdapter(this, sLists));
         recyclerView.addOnScrollListener(new AutoLoadScrollListener());
         AutoLoadScrollListener.setMaxFlingVelocity(recyclerView,simpleAdapter,14000);
+        simpleAdapter.setOnItemClickListener(new SimpleAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                startActivity(new Intent(CoordinatorActivity.this,GoodsShelfActivity.class));
+            }
+        });
     }
 
     //数据初始化
@@ -131,8 +138,8 @@ public class CoordinatorActivity extends AppCompatActivity {
                     shop.setPicture_loacal(R.mipmap.shop2);
                     break;
             }
-            shop.setShopDescrition("这是第 " + i + " 个对商家的描述信息");
-            shop.setShopName("食尚" + i + "号馆");
+            shop.setShopDescrition("这是第 " + i + " 个商家描述，正在促销！点击进入..");
+            shop.setShopName("食尚" + i + "号街");
             sLists.add(shop);
         }
     }
