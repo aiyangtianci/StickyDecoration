@@ -49,7 +49,7 @@ public abstract class BaseAdapter<T,K extends RecyclerView.ViewHolder>  extends 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mMessages.size();
     }
     public boolean getScrolling(){
         return scroll;

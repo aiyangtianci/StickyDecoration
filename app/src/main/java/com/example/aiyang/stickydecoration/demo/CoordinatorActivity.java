@@ -5,28 +5,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.aiyang.stickydecoration.R;
-import com.example.aiyang.stickydecoration.adapter.SimpleAdapter;
+import com.example.aiyang.stickydecoration.adapter.ShopAdapter;
 import com.example.aiyang.stickydecoration.bean.ShopBean;
 import com.example.aiyang.stickydecoration.commen.CommonUtil;
 import com.example.aiyang.stickydecoration.view.AppBarStateChangeListener;
 import com.example.aiyang.stickydecoration.view.AutoLoadScrollListener;
-import com.example.aiyang.stickydecoration.view.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +40,7 @@ public class CoordinatorActivity extends AppCompatActivity {
     private float LL_SEARCH_MAX_WIDTH, LL_SEARCH_MIN_WIDTH;
     private ViewGroup.MarginLayoutParams searchLayoutParams;
     //创建GestureDetector实例
-    private GestureDetector detector;
-    private SimpleAdapter simpleAdapter;
+    private ShopAdapter simpleAdapter;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,20 +65,16 @@ public class CoordinatorActivity extends AppCompatActivity {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state, int i) {
                 if (state == State.EXPANDED) {
-                    System.out.println("展开---");
                     //展开状态
                     toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
-
                     setSearchInvisible();
                 } else if (state == State.COLLAPSED) {
-                    System.out.println("折叠---");
                     //折叠状态
                     toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
                     setSearchVisible();
                 } else {
                     //中间状态
                     toolbar.setNavigationIcon(null);
-                    System.out.println("滑动中---");
                     onSearchLayoutParams(appBarLayout.getTotalScrollRange(), Math.abs(i));
                 }
             }
@@ -96,10 +86,10 @@ public class CoordinatorActivity extends AppCompatActivity {
 //        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
         RecyclerView.LayoutManager layoutManager =new StaggeredGridLayoutManager(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(simpleAdapter = new SimpleAdapter(this, sLists));
+        recyclerView.setAdapter(simpleAdapter = new ShopAdapter(this, sLists));
         recyclerView.addOnScrollListener(new AutoLoadScrollListener());
         AutoLoadScrollListener.setMaxFlingVelocity(recyclerView,simpleAdapter,14000);
-        simpleAdapter.setOnItemClickListener(new SimpleAdapter.OnItemClickListener() {
+        simpleAdapter.setOnItemClickListener(new ShopAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
                 startActivity(new Intent(CoordinatorActivity.this,GoodsShelfActivity.class));

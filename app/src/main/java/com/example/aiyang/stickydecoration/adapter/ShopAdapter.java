@@ -23,7 +23,7 @@ import java.util.Locale;
 /**
  * 餐厅适配器
  */
-public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder> {
+public class ShopAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder> {
 
     /**
      * context
@@ -34,7 +34,7 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
      */
     private List<ShopBean> flist;
 
-    public SimpleAdapter(Context mContext, List<ShopBean> flist) {
+    public ShopAdapter(Context mContext, List<ShopBean> flist) {
         super(mContext, flist);
         this.mContext =mContext;
         this.flist =flist;
@@ -91,11 +91,6 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
             }
 
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return flist.size();
     }
 
     //定义接口
