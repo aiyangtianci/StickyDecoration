@@ -100,7 +100,7 @@ public class CoordinatorActivity extends AppCompatActivity {
     //数据初始化
     private void initData() {
         ShopBean shop;
-        for (int i = 0; i < 36; i++) {
+        for (int i = 0; i < 66; i++) {
             shop = new ShopBean();
             int index = i % 6;
             switch (index) {
