@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -90,11 +92,12 @@ public class CoordinatorActivity extends AppCompatActivity {
 
     private void initListView(){
         recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
+        RecyclerView.LayoutManager layoutManager =new StaggeredGridLayoutManager(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(simpleAdapter = new SimpleAdapter(this, sLists));
         recyclerView.addOnScrollListener(new AutoLoadScrollListener());
-        AutoLoadScrollListener.setMaxFlingVelocity(recyclerView,simpleAdapter,16000);
+        AutoLoadScrollListener.setMaxFlingVelocity(recyclerView,simpleAdapter,14000);
     }
 
     //数据初始化
@@ -109,7 +112,7 @@ public class CoordinatorActivity extends AppCompatActivity {
                     break;
 
                 case 1:
-                    shop.setPicture_loacal(R.mipmap.shop2);
+                    shop.setPicture_loacal(R.mipmap.shop6);
                     break;
 
                 case 2:
@@ -125,7 +128,7 @@ public class CoordinatorActivity extends AppCompatActivity {
                     break;
 
                 case 5:
-                    shop.setPicture_loacal(R.mipmap.shop6);
+                    shop.setPicture_loacal(R.mipmap.shop2);
                     break;
             }
             shop.setShopDescrition("这是第 " + i + " 个对商家的描述信息");

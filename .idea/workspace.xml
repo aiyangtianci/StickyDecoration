@@ -16,7 +16,8 @@
     <last-search-timestamp>1575023854216</last-search-timestamp>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b60ba22-8d44-4dac-b1e7-de937d7a65b4" name="Default Changelist" comment="">
+    <list default="true" id="0b60ba22-8d44-4dac-b1e7-de937d7a65b4" name="Default Changelist" comment="1、惯性滚动时才不加载数据；&#10;2、顶部/底部不刷新数据。&#10;3、提高列表滑动速度。">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/view/RoundRectLinearLayout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -28,7 +29,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/adapter/SimpleAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/adapter/SimpleAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/demo/CoordinatorActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/demo/CoordinatorActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/view/AutoLoadScrollListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aiyang/stickydecoration/view/AutoLoadScrollListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_coordinator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_coordinator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_img.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,8 +57,8 @@
         <option value="valueResourceFile" />
         <option value="resourceFile" />
         <option value="layoutResourceFile_vertical" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -83,7 +84,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -354,8 +355,25 @@
       <option name="project" value="LOCAL" />
       <updated>1594746804562</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="1、惯性滚动时才不加载数据；&#10;2、顶部/底部不刷新数据。&#10;3、提高列表滑动速度。">
+      <created>1594784372517</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1594784372517</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -404,7 +422,8 @@
     <MESSAGE value="update description text lines" />
     <MESSAGE value="update  dialog  style" />
     <MESSAGE value="1、部分颜色修改，ui调整；&#10;2、商店滑动监听动态加载；" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、部分颜色修改，ui调整；&#10;2、商店滑动监听动态加载；" />
+    <MESSAGE value="1、惯性滚动时才不加载数据；&#10;2、顶部/底部不刷新数据。&#10;3、提高列表滑动速度。" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、惯性滚动时才不加载数据；&#10;2、顶部/底部不刷新数据。&#10;3、提高列表滑动速度。" />
   </component>
   <component name="masterDetails">
     <states>

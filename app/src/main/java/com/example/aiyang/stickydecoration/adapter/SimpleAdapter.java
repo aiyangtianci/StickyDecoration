@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -43,11 +44,13 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
         TextView shop_name;
         TextView tv_unit;
         ImageView imageView ;
+        LinearLayout description_ll;
         public ViewHolde(View itemView) {
             super(itemView);
             shop_name =itemView.findViewById(R.id.shop_name);
             tv_unit = itemView.findViewById(R.id.shop_description);
             imageView = itemView.findViewById(R.id.shop_img);
+            description_ll= itemView.findViewById(R.id.description_ll);
         }
     }
 
@@ -61,8 +64,13 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
     protected void setOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         ShopBean item = flist.get(position);
         if (viewHolder instanceof ViewHolde){
-            ((ViewHolde) viewHolder).shop_name.setText(item.getShopName());
-            ((ViewHolde) viewHolder).tv_unit.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getShopDescrition()));
+            if (position == 0){
+                ((ViewHolde) viewHolder).description_ll.setVisibility(View.GONE);
+            }else{
+                ((ViewHolde) viewHolder).description_ll.setVisibility(View.VISIBLE);
+                ((ViewHolde) viewHolder).shop_name.setText(item.getShopName());
+                ((ViewHolde) viewHolder).tv_unit.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getShopDescrition()));
+            }
 
             if(scroll){//滚动不加载图片
                 ((ViewHolde) viewHolder).imageView.setImageResource(R.drawable.ic_launcher_foreground);
