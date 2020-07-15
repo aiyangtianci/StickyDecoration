@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/shop_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="10dp"
         android:src="@mipmap/shop1" />
 
 

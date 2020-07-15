@@ -3,15 +3,20 @@ package com.example.aiyang.stickydecoration.view;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-public class AutoLoadScrollListener extends RecyclerView.OnScrollListener  {
-    private boolean scrlled;
+import java.lang.reflect.Field;
+
+/**
+ * 自动加载数据，滚动监听
+ */
+public class AutoLoadScrollListener extends RecyclerView.OnScrollListener {
+    private boolean scrolled;
     private BaseAdapter mAdapter;
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
         if (dy != 0) {
-            scrlled = true;
+            scrolled = true;
         }
     }
 
@@ -23,12 +28,11 @@ public class AutoLoadScrollListener extends RecyclerView.OnScrollListener  {
                 if (adapter instanceof BaseAdapter) {
                     this.mAdapter = (BaseAdapter) adapter;
                 }
-                if (mAdapter.getScrolling() && scrlled) {
+                if (mAdapter.getScrolling() && scrolled) {
                     mAdapter.setScrolling(false);//正常显示
-                    Log.d("aaa", "UI更新显示---");
-                        mAdapter.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
                 }
-                scrlled = false;
+                scrolled = false;
                 break;
             case RecyclerView.SCROLL_STATE_DRAGGING: //（上升）
                 break;
@@ -36,5 +40,34 @@ public class AutoLoadScrollListener extends RecyclerView.OnScrollListener  {
                 break;
         }
         super.onScrollStateChanged(recyclerView, newState);
+    }
+
+    /**
+     * 改变Recycler的滑动速度
+     *
+     * @param recyclerView
+     * @param velocity     滑动速度默认是8000dp
+     */
+    public static void setMaxFlingVelocity(RecyclerView recyclerView, final BaseAdapter adapter, final int velocity) {
+        try {
+            Field field = recyclerView.getClass().getDeclaredField("mMaxFlingVelocity");
+            field.setAccessible(true);
+            field.set(recyclerView, velocity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //快速滑动
+        recyclerView.setOnFlingListener(new RecyclerView.OnFlingListener() {
+            @Override
+            public boolean onFling(int xv, int yv) {//xv是x方向滑动速度，yv是y方向滑动速度。
+                Log.d("aaa", "惯性滑动---"+yv);
+                if (yv >= velocity) {
+                    adapter.setScrolling(true);
+                }else{
+                    adapter.setScrolling(false);
+                }
+                return false;
+            }
+        });
     }
 }

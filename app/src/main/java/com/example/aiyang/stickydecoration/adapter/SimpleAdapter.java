@@ -54,20 +54,18 @@ public class SimpleAdapter extends BaseAdapter<ShopBean,RecyclerView.ViewHolder>
     @Override
     protected RecyclerView.ViewHolder createViewHolder(int viewType, ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_img,parent,false);
-        System.out.println("createViewHolder---");
         return new ViewHolde(view);
     }
 
     @Override
     protected void setOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         ShopBean item = flist.get(position);
-        System.out.println("setOnBindViewHolder---");
         if (viewHolder instanceof ViewHolde){
             ((ViewHolde) viewHolder).shop_name.setText(item.getShopName());
             ((ViewHolde) viewHolder).tv_unit.setText(String.format(Locale.CHINA, "商家介绍：%s", item.getShopDescrition()));
 
             if(scroll){//滚动不加载图片
-                ((ViewHolde) viewHolder).imageView.setImageResource(R.mipmap.ic_launcher);
+                ((ViewHolde) viewHolder).imageView.setImageResource(R.drawable.ic_launcher_foreground);
             }else {//加载图片
                 Glide.with(mContext).
                         load(item.getPicture_loacal())

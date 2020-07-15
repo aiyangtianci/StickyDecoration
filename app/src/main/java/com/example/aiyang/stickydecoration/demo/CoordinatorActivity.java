@@ -49,15 +49,19 @@ public class CoordinatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coordinator);
         toolbar = findViewById(R.id.toolbar);
-        ll_search = findViewById(R.id.ll_search);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         initData();
-        recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(simpleAdapter = new SimpleAdapter(this, sLists));
-        recyclerView.addOnScrollListener(new AutoLoadScrollListener());
+        appBarViewChange();
+        initListView();
+    }
+
+    private void appBarViewChange() {
+        //搜索框
+        ll_search = findViewById(R.id.ll_search);
+        LL_SEARCH_MAX_WIDTH = CommonUtil.getScreenWidth(this) - CommonUtil.dp2px(this, 170f);//布局默认展开时的宽度
+        LL_SEARCH_MIN_WIDTH = CommonUtil.dp2px(this, 10f);//布局关闭时的宽度
+        searchLayoutParams = (ViewGroup.MarginLayoutParams) ll_search.getLayoutParams();
         appbarlayout = findViewById(R.id.appbarlayout);
         //联动
         appbarlayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
@@ -82,38 +86,21 @@ public class CoordinatorActivity extends AppCompatActivity {
                 }
             }
         });
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                detector.onTouchEvent(motionEvent);
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Log.d("aaa", "抬起---");
-//                    simpleAdapter.setScrolling(false);
-                }
-                return false;
-            }
-        });
-        //搜索框
-        LL_SEARCH_MAX_WIDTH = CommonUtil.getScreenWidth(this) - CommonUtil.dp2px(this, 170f);//布局默认展开时的宽度
-        LL_SEARCH_MIN_WIDTH = CommonUtil.dp2px(this, 10f);//布局关闭时的宽度
-        searchLayoutParams = (ViewGroup.MarginLayoutParams) ll_search.getLayoutParams();
-
-        detector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-
-                if (Math.abs(v1) > 4000) {
-                    simpleAdapter.setScrolling(true);
-                    Log.d("aaa", "快速滑动中---" + Math.abs(v1));
-                }
-                return false;
-            }
-        });
     }
 
+    private void initListView(){
+        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(simpleAdapter = new SimpleAdapter(this, sLists));
+        recyclerView.addOnScrollListener(new AutoLoadScrollListener());
+        AutoLoadScrollListener.setMaxFlingVelocity(recyclerView,simpleAdapter,16000);
+    }
+
+    //数据初始化
     private void initData() {
         ShopBean shop;
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 36; i++) {
             shop = new ShopBean();
             int index = i % 6;
             switch (index) {
