@@ -81,18 +81,18 @@ public class CoordinatorActivity extends AppCompatActivity {
         });
     }
 
-    private void initListView(){
+    private void initListView() {
         recyclerView = findViewById(R.id.recyclerView);
 //        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
-        RecyclerView.LayoutManager layoutManager =new StaggeredGridLayoutManager(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS,StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(simpleAdapter = new ShopAdapter(this, sLists));
         recyclerView.addOnScrollListener(new AutoLoadScrollListener());
-        AutoLoadScrollListener.setMaxFlingVelocity(recyclerView,simpleAdapter,14000);
+        AutoLoadScrollListener.setMaxFlingVelocity(recyclerView, simpleAdapter, 14000);
         simpleAdapter.setOnItemClickListener(new ShopAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(new Intent(CoordinatorActivity.this,GoodsShelfActivity.class));
+                startActivity(new Intent(CoordinatorActivity.this, GoodsShelfActivity.class));
             }
         });
     }
